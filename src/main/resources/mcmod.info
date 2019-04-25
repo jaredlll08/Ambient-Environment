@@ -1,0 +1,18 @@
+[
+  {
+    "modid": "ambiance",
+    "name": "Ambiance",
+    "description": "Adds more ambiance to the game",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": [
+      "Jaredlll08"
+    ],
+    "credits": "MC Bedrock edition lol",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
