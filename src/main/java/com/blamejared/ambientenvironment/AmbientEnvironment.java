@@ -1,12 +1,12 @@
-package com.blamejared.ambiance;
+package com.blamejared.ambientenvironment;
 
 import net.minecraft.world.biome.BiomeColorHelper;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.relauncher.*;
 
-@Mod(modid = "ambiance", name = "Ambiance", version = "1.0.0")
-public class Ambiance {
+@Mod(modid = "ambientenvironment", name = "Ambient Environment", version = "1.0.0")
+public class AmbientEnvironment {
     
     public static OpenSimplexNoise NOISE_GRASS = new OpenSimplexNoise("NOISE_GRASS".hashCode());
     public static OpenSimplexNoise NOISE_WATER = new OpenSimplexNoise("NOISE_WATER".hashCode());

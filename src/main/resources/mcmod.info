@@ -1,7 +1,7 @@
 [
   {
-    "modid": "ambiance",
-    "name": "Ambiance",
+    "modid": "ambientenvironment",
+    "name": "Ambient Environment",
     "description": "Adds more ambiance to the game",
     "version": "${version}",
     "mcversion": "${mcversion}",

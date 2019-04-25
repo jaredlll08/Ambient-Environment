@@ -12,8 +12,8 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 
 version = "1.0.0"
-group = "com.blamejared.ambiance"
-archivesBaseName = "Ambiance"
+group = "com.blamejared.ambientenvironment"
+archivesBaseName = "Ambient Environment"
 
 sourceCompatibility = targetCompatibility = '1.8'
 compileJava {
@@ -28,7 +28,7 @@ minecraft {
 
 jar {
     manifest {
-        attributes 'FMLAT': 'ambiance_at.cfg'
+        attributes 'FMLAT': 'ambientenvironment_at.cfg'
 
     }
 }
