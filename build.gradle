@@ -11,9 +11,9 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = "1.0.0"
+version = "1.0.1"
 group = "com.blamejared.ambientenvironment"
-archivesBaseName = "Ambient Environment"
+archivesBaseName = "AmbientEnvironment"
 
 sourceCompatibility = targetCompatibility = '1.8'
 compileJava {

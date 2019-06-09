@@ -5,7 +5,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.relauncher.*;
 
-@Mod(modid = "ambientenvironment", name = "Ambient Environment", version = "1.0.0")
+@Mod(modid = "ambientenvironment", name = "Ambient Environment", version = "1.0.1", clientSideOnly = true)
 public class AmbientEnvironment {
     
     public static OpenSimplexNoise NOISE_GRASS = new OpenSimplexNoise("NOISE_GRASS".hashCode());
