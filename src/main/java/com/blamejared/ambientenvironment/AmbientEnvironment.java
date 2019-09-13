@@ -79,9 +79,9 @@ public class AmbientEnvironment {
     }
     
     private static int toInt(float[] argb) {
-        int r = Math.round(argb[1] * 255) & 0xFF;
-        int g = Math.round(argb[2] * 255) & 0xFF;
-        int b = Math.round(argb[3] * 255) & 0xFF;
+        int r = Math.round(Math.min(1f, argb[1]) * 255) & 0xFF;
+        int g = Math.round(Math.min(1f, argb[2]) * 255) & 0xFF;
+        int b = Math.round(Math.min(1f, argb[3]) * 255) & 0xFF;
         int a = Math.round(argb[0] * 255) & 0xFF;
         return (a << 24) + (r << 16) + (g << 8) + (b);
     }
