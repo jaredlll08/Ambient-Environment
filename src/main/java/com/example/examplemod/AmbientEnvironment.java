@@ -27,18 +27,18 @@ public class AmbientEnvironment {
         
         
         BiomeColors.GRASS_COLOR = (biome, pos) -> {
-            int moddedBiomeGrassColor = grassColor.getColor(biome, pos);
+            int newColor = grassColor.getColor(biome, pos);
             float scale = 8f;
             double value = ((NOISE_GRASS.getValue(pos.getX() / scale, pos.getZ() / scale)));
             double darkness = 0.25f;
             value = curve(0, 1, remap(value, -((1 << levels) - 1), (1 << levels) - 1, 0, 1), 1) * darkness;
-            return blend(moddedBiomeGrassColor, 0, (float) (value));
+            return blend(newColor, 0, (float) (value));
         };
         BiomeColors.WATER_COLOR = (biome, pos) -> {
             int newColor = waterColor.getColor(biome, pos);
             float scale = 16f;
             double value = ((NOISE_WATER.getValue(pos.getX() / scale, pos.getZ() / scale)));
-            double darkness = 0.25f;
+            double darkness = 0.3f;
             value = curve(0, 1, remap(value, -((1 << levels) - 1), (1 << levels) - 1, 0, 1), 1) * darkness;
             return blend(newColor, 0, (float) (value));
         };
