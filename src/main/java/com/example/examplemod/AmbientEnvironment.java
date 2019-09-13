@@ -32,7 +32,7 @@ public class AmbientEnvironment {
             double value = ((NOISE_GRASS.getValue(pos.getX() / scale, pos.getZ() / scale)));
             double darkness = 0.25f;
             value = curve(0, 1, remap(value, -((1 << levels) - 1), (1 << levels) - 1, 0, 1), 1) * darkness;
-            return blend(moddedBiomeGrassColor, 0X1b3800, (float) (value));
+            return blend(moddedBiomeGrassColor, 0, (float) (value));
         };
         BiomeColors.WATER_COLOR = (biome, pos) -> {
             int newColor = waterColor.getColor(biome, pos);
@@ -40,7 +40,7 @@ public class AmbientEnvironment {
             double value = ((NOISE_WATER.getValue(pos.getX() / scale, pos.getZ() / scale)));
             double darkness = 0.25f;
             value = curve(0, 1, remap(value, -((1 << levels) - 1), (1 << levels) - 1, 0, 1), 1) * darkness;
-            return blend(newColor, 0x1e1e30, (float) (value));
+            return blend(newColor, 0, (float) (value));
         };
         BiomeColors.FOLIAGE_COLOR = (biome, pos) -> {
             int newColor = foliageColor.getColor(biome, pos);
@@ -48,7 +48,7 @@ public class AmbientEnvironment {
             double value = ((NOISE_FOLIAGE.getValue(pos.getX() / scale, pos.getZ() / scale)));
             double darkness = 1;
             value = curve(0, 1, remap(value, -((1 << levels) - 1), (1 << levels) - 1, 0, 1), 1) * darkness;
-            return blend(newColor, 0x418600, (float) (value));
+            return blend(newColor, 0, (float) (value));
         };
     }
     
@@ -91,7 +91,7 @@ public class AmbientEnvironment {
     public static double curve(double start, double end, double amount, double waves) {
         amount = clamp(amount, 0, 1);
         amount = clamp((amount - start) / (end - start), 0, 1);
-        return 0.5 + 0.5 * Math.sin(Math.cos(Math.PI * Math.tan(0.9 * amount))) * Math.cos(Math.sin(Math.tan(amount)));
+        return clamp(0.5 + 0.5 * Math.sin(Math.cos(Math.PI * Math.tan(90 * amount))) * Math.cos(Math.sin(Math.tan(amount))), 0, 1);
     }
     
     public static int blend(int color1, int color2, float ratio) {
