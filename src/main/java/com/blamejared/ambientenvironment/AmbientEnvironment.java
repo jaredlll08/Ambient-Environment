@@ -1,4 +1,4 @@
-package com.example.examplemod;
+package com.blamejared.ambientenvironment;
 
 import net.minecraft.world.biome.BiomeColors;
 import net.minecraft.world.gen.PerlinNoiseGenerator;
@@ -18,13 +18,12 @@ public class AmbientEnvironment {
     private void doClientStuff(final FMLClientSetupEvent event) {
         BiomeColors.IColorResolver grassColor = BiomeColors.GRASS_COLOR;
         BiomeColors.IColorResolver waterColor = BiomeColors.WATER_COLOR;
-        BiomeColors.IColorResolver foliageColor = BiomeColors.FOLIAGE_COLOR;
-    
+//        BiomeColors.IColorResolver foliageColor = BiomeColors.FOLIAGE_COLOR;
+        
         int levels = 2;
         PerlinNoiseGenerator NOISE_GRASS = new PerlinNoiseGenerator(new Random("NOISE_GRASS".hashCode()), levels);
         PerlinNoiseGenerator NOISE_WATER = new PerlinNoiseGenerator(new Random("NOISE_WATER".hashCode()), levels);
-        PerlinNoiseGenerator NOISE_FOLIAGE = new PerlinNoiseGenerator(new Random("NOISE_FOLIAGE".hashCode()), levels);
-        
+//        PerlinNoiseGenerator NOISE_FOLIAGE = new PerlinNoiseGenerator(new Random("NOISE_FOLIAGE".hashCode()), levels);
         
         BiomeColors.GRASS_COLOR = (biome, pos) -> {
             int newColor = grassColor.getColor(biome, pos);
@@ -42,14 +41,14 @@ public class AmbientEnvironment {
             value = curve(0, 1, remap(value, -((1 << levels) - 1), (1 << levels) - 1, 0, 1), 1) * darkness;
             return blend(newColor, 0, (float) (value));
         };
-        BiomeColors.FOLIAGE_COLOR = (biome, pos) -> {
-            int newColor = foliageColor.getColor(biome, pos);
-            float scale = 8f;
-            double value = ((NOISE_FOLIAGE.getValue(pos.getX() / scale, pos.getZ() / scale)));
-            double darkness = 1;
-            value = curve(0, 1, remap(value, -((1 << levels) - 1), (1 << levels) - 1, 0, 1), 1) * darkness;
-            return blend(newColor, 0, (float) (value));
-        };
+//        BiomeColors.FOLIAGE_COLOR = (biome, pos) -> {
+//            int newColor = foliageColor.getColor(biome, pos);
+//            float scale = 8f;
+//            double value = ((NOISE_FOLIAGE.getValue(pos.getX() / scale, pos.getZ() / scale)));
+//            double darkness = 1;
+//            value = curve(0, 1, remap(value, -((1 << levels) - 1), (1 << levels) - 1, 0, 1), 1) * darkness;
+//            return blend(newColor, 0, (float) (value));
+//        };
     }
     
     public static double remap(double value, double currentLow, double currentHigh, double newLow, double newHigh) {

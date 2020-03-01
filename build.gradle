@@ -22,7 +22,7 @@ archivesBaseName = 'AmbientEnvironment'
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
 minecraft {
-    mappings channel: 'snapshot', version: '20190719-1.14.3'
+    mappings channel: 'snapshot', version: '20200119-1.14.4'
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -74,7 +74,7 @@ minecraft {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.14.4-28.1.0'
+    minecraft 'net.minecraftforge:forge:1.14.4-28.2.3'
 
 
 }
