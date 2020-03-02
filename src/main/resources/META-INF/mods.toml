@@ -1,5 +1,5 @@
 modLoader="javafml" #mandatory
-loaderVersion="[28,)" #mandatory (28 is current forge version)
+loaderVersion="[31,)" #mandatory (28 is current forge version)
 [[mods]] #mandatory
 modId="ambientenvironment" #mandatory
 version="${file.jarVersion}" #mandatory
@@ -9,15 +9,3 @@ authors="Jaredlll08" #optional
 description='''
 Adds more ambiance to the game
 '''
-[[dependencies.examplemod]] #optional
-    modId="forge" #mandatory
-    mandatory=true #mandatory
-    versionRange="[28,)" #mandatory
-    ordering="NONE"
-    side="BOTH"
-[[dependencies.examplemod]]
-    modId="minecraft"
-    mandatory=true
-    versionRange="[1.14.4]"
-    ordering="NONE"
-    side="BOTH"
