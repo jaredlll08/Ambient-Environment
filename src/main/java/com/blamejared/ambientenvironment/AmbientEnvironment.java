@@ -1,7 +1,9 @@
 package com.blamejared.ambientenvironment;
 
+import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.world.biome.BiomeColors;
 import net.minecraft.world.gen.PerlinNoiseGenerator;
+import net.minecraft.world.level.ColorResolver;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -16,27 +18,27 @@ public class AmbientEnvironment {
     }
     
     private void doClientStuff(final FMLClientSetupEvent event) {
-        BiomeColors.IColorResolver grassColor = BiomeColors.GRASS_COLOR;
-        BiomeColors.IColorResolver waterColor = BiomeColors.WATER_COLOR;
+        ColorResolver grassColor = BiomeColors.GRASS_COLOR;
+        ColorResolver waterColor = BiomeColors.WATER_COLOR;
 //        BiomeColors.IColorResolver foliageColor = BiomeColors.FOLIAGE_COLOR;
         
         int levels = 2;
-        PerlinNoiseGenerator NOISE_GRASS = new PerlinNoiseGenerator(new Random("NOISE_GRASS".hashCode()), levels);
-        PerlinNoiseGenerator NOISE_WATER = new PerlinNoiseGenerator(new Random("NOISE_WATER".hashCode()), levels);
+        PerlinNoiseGenerator NOISE_GRASS = new PerlinNoiseGenerator(new SharedSeedRandom("NOISE_GRASS".hashCode()), levels, 0);
+        PerlinNoiseGenerator NOISE_WATER = new PerlinNoiseGenerator(new SharedSeedRandom("NOISE_WATER".hashCode()), levels, 0);
 //        PerlinNoiseGenerator NOISE_FOLIAGE = new PerlinNoiseGenerator(new Random("NOISE_FOLIAGE".hashCode()), levels);
         
-        BiomeColors.GRASS_COLOR = (biome, pos) -> {
-            int newColor = grassColor.getColor(biome, pos);
+        BiomeColors.GRASS_COLOR = (biome, posX, posZ) -> {
+            int newColor = grassColor.getColor(biome, posX, posZ);
             float scale = 8f;
-            double value = ((NOISE_GRASS.getValue(pos.getX() / scale, pos.getZ() / scale)));
+            double value = ((NOISE_GRASS.noiseAt(posX / scale, posZ / scale, false)));
             double darkness = 0.25f;
             value = curve(0, 1, remap(value, -((1 << levels) - 1), (1 << levels) - 1, 0, 1), 1) * darkness;
             return blend(newColor, 0, (float) (value));
         };
-        BiomeColors.WATER_COLOR = (biome, pos) -> {
-            int newColor = waterColor.getColor(biome, pos);
+        BiomeColors.WATER_COLOR = (biome, posX, posZ) -> {
+            int newColor = waterColor.getColor(biome, posX, posZ);
             float scale = 16f;
-            double value = ((NOISE_WATER.getValue(pos.getX() / scale, pos.getZ() / scale)));
+            double value = ((NOISE_WATER.noiseAt(posX / scale, posZ / scale, false)));
             double darkness = 0.3f;
             value = curve(0, 1, remap(value, -((1 << levels) - 1), (1 << levels) - 1, 0, 1), 1) * darkness;
             return blend(newColor, 0, (float) (value));
