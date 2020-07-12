@@ -9,6 +9,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import java.util.Random;
+import java.util.stream.IntStream;
 
 @Mod("ambientenvironment")
 public class AmbientEnvironment {
@@ -23,8 +24,8 @@ public class AmbientEnvironment {
 //        BiomeColors.IColorResolver foliageColor = BiomeColors.FOLIAGE_COLOR;
 
         int levels = 2;
-        PerlinNoiseGenerator NOISE_GRASS = new PerlinNoiseGenerator(new SharedSeedRandom("NOISE_GRASS".hashCode()), levels, 0);
-        PerlinNoiseGenerator NOISE_WATER = new PerlinNoiseGenerator(new SharedSeedRandom("NOISE_WATER".hashCode()), levels, 0);
+        PerlinNoiseGenerator NOISE_GRASS = new PerlinNoiseGenerator(new SharedSeedRandom("NOISE_GRASS".hashCode()), IntStream.rangeClosed(0, levels));
+        PerlinNoiseGenerator NOISE_WATER = new PerlinNoiseGenerator(new SharedSeedRandom("NOISE_WATER".hashCode()), IntStream.rangeClosed(0, levels));
 //        PerlinNoiseGenerator NOISE_FOLIAGE = new PerlinNoiseGenerator(new Random("NOISE_FOLIAGE".hashCode()), levels);
 
         BiomeColors.GRASS_COLOR = (biome, posX, posZ) -> {

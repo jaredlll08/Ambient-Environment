@@ -25,7 +25,7 @@ if (project.hasProperty('secretFile')) {
     loadSecrets(new File((String) findProperty('secretFile')))
 }
 
-version = '3.0.0'
+version = '4.0.0'
 if (System.getenv('BUILD_NUMBER') != null) {
     version += "." + System.getenv('BUILD_NUMBER')
 }
@@ -34,8 +34,14 @@ archivesBaseName = 'AmbientEnvironment'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
+repositories {
+    maven {
+        url 'https://dogforce-games.com/maven'
+    }
+}
+
 minecraft {
-    mappings channel: 'snapshot', version: '20200301-1.15.1'
+    mappings channel: 'snapshot', version: '20200712-1.16.1'
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -112,7 +118,7 @@ task genGitChangelog() {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.15.2-31.1.18'
+    minecraft 'net.minecraftforge:forge:1.16.1-32.0.63'
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
@@ -203,7 +209,7 @@ curseforge {
 
     apiKey = findProperty('curseforge_api_token') ?: 0
     project {
-        id = "250398"
+        id = "320163"
         releaseType = 'release'
         changelog = file("changelog.md")
         changelogType = 'markdown'
@@ -225,7 +231,7 @@ task updateVersionTracker {
         def body = [
                 'author'        : "${project.findProperty('versionTrackerAuthor')}",
                 'projectName'   : "AmbientEnvironment",
-                'gameVersion'   : "1.15.2",
+                'gameVersion'   : "1.16.1",
                 'projectVersion': "${version}",
                 'homepage'      : "${project.findProperty('versionTrackerHomepage')}",
                 'uid'           : "${project.findProperty('versionTrackerKey')}"
