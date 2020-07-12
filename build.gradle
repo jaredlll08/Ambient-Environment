@@ -95,7 +95,7 @@ minecraft {
 task genGitChangelog() {
     def stdout = new ByteArrayOutputStream()
     // first commit to check from, in our case the first commit of the branch
-    String firstCommit = "e12268137039e4caf601f77866f69d8748b05560";
+    String firstCommit = "9831ec8676cccc814935cb3192cc4250aa6d3cd7";
     String repoLink = "https://github.com/jaredlll08/Ambient-Environment/commit/"
     // was having issues with grep and spaces in the regex
     exec {
