@@ -7,7 +7,7 @@ version="${file.jarVersion}" #mandatory
 displayName="Ambient Environment" #mandatory
 credits="MC Bedrock edition lol" #optional
 authors="Jaredlll08" #optional
-updateJSONURL="https://updates.blamejared.com/get?n=AmbientEnvironment&gv=1.16.2"
+updateJSONURL="https://updates.blamejared.com/get?n=AmbientEnvironment&gv=1.16.3"
 description='''
 Adds more ambiance to the game
 '''
