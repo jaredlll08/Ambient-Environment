@@ -4,17 +4,22 @@ import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.world.biome.BiomeColors;
 import net.minecraft.world.gen.PerlinNoiseGenerator;
 import net.minecraft.world.level.ColorResolver;
+import net.minecraftforge.fml.ExtensionPoint;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.network.FMLNetworkConstants;
 
-import java.util.Random;
 import java.util.stream.IntStream;
+
+import org.apache.commons.lang3.tuple.Pair;
 
 @Mod("ambientenvironment")
 public class AmbientEnvironment {
 
     public AmbientEnvironment() {
+    	ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.DISPLAYTEST, () -> Pair.of(() -> FMLNetworkConstants.IGNORESERVERONLY, (a, b) -> true));
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
     }
 
