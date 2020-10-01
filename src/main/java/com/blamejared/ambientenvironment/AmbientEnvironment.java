@@ -19,7 +19,7 @@ import org.apache.commons.lang3.tuple.Pair;
 public class AmbientEnvironment {
 
     public AmbientEnvironment() {
-    	ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.DISPLAYTEST, () -> Pair.of(() -> FMLNetworkConstants.IGNORESERVERONLY, (a, b) -> true));
+        ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.DISPLAYTEST, () -> Pair.of(() -> FMLNetworkConstants.IGNORESERVERONLY, (a, b) -> true));
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
     }
 
