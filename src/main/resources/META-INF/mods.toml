@@ -1,6 +1,7 @@
 modLoader="javafml" #mandatory
 loaderVersion="[33,)"
 license="MIT"
+issueTrackerURL="https://github.com/jaredlll08/Ambient-Environment/issues"
 [[mods]] #mandatory
 modId="ambientenvironment" #mandatory
 version="${file.jarVersion}" #mandatory
@@ -11,3 +12,4 @@ updateJSONURL="https://updates.blamejared.com/get?n=AmbientEnvironment&gv=1.16.3
 description='''
 Adds more ambiance to the game
 '''
+displayURL="https://www.curseforge.com/minecraft/mc-mods/ambient-environment"
