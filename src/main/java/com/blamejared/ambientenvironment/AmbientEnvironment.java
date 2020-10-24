@@ -16,7 +16,7 @@ import java.util.stream.IntStream;
 import org.apache.commons.lang3.tuple.Pair;
 
 @Mod("ambientenvironment")
-public final class AmbientEnvironment {
+public class AmbientEnvironment {
 
     public AmbientEnvironment() {
         ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.DISPLAYTEST, () -> Pair.of(() -> FMLNetworkConstants.IGNORESERVERONLY, (a, b) -> true));
@@ -24,16 +24,14 @@ public final class AmbientEnvironment {
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
-        final ColorResolver
-                grassColor = BiomeColors.GRASS_COLOR,
-                waterColor = BiomeColors.WATER_COLOR;
+        final ColorResolver grassColor = BiomeColors.GRASS_COLOR;
+        final ColorResolver waterColor = BiomeColors.WATER_COLOR;
 //        final BiomeColors.IColorResolver foliageColor = BiomeColors.FOLIAGE_COLOR;
 
         final int levels = 2;
-        final PerlinNoiseGenerator
-                NOISE_GRASS = new PerlinNoiseGenerator(new SharedSeedRandom("NOISE_GRASS".hashCode()), IntStream.rangeClosed(0, levels)),
-                NOISE_WATER = new PerlinNoiseGenerator(new SharedSeedRandom("NOISE_WATER".hashCode()), IntStream.rangeClosed(0, levels));
-//                NOISE_FOLIAGE = new PerlinNoiseGenerator(new Random("NOISE_FOLIAGE".hashCode()), levels);
+        final PerlinNoiseGenerator NOISE_GRASS = new PerlinNoiseGenerator(new SharedSeedRandom("NOISE_GRASS".hashCode()), IntStream.rangeClosed(0, levels));
+        final PerlinNoiseGenerator NOISE_WATER = new PerlinNoiseGenerator(new SharedSeedRandom("NOISE_WATER".hashCode()), IntStream.rangeClosed(0, levels));
+//        final PerlinNoiseGenerator NOISE_FOLIAGE = new PerlinNoiseGenerator(new Random("NOISE_FOLIAGE".hashCode()), levels);
 
         BiomeColors.GRASS_COLOR = (biome, posX, posZ) -> {
             final int newColor = grassColor.getColor(biome, posX, posZ);
@@ -86,11 +84,10 @@ public final class AmbientEnvironment {
     }
 
     private static int toInt(final float[] argb) {
-        final int
-                r = (int) Math.floor(argb[1] * 255) & 0xFF,
-                g = (int) Math.floor(argb[2] * 255) & 0xFF,
-                b = (int) Math.floor(argb[3] * 255) & 0xFF,
-                a = (int) Math.floor(argb[0] * 255) & 0xFF;
+        final int r = (int) Math.floor(argb[1] * 255) & 0xFF;
+        final int g = (int) Math.floor(argb[2] * 255) & 0xFF;
+        final int b = (int) Math.floor(argb[3] * 255) & 0xFF;
+        final int a = (int) Math.floor(argb[0] * 255) & 0xFF;
         return (a << 24) + (r << 16) + (g << 8) + (b);
     }
 
@@ -107,7 +104,8 @@ public final class AmbientEnvironment {
     public static int blend(final int color1, final int color2, final float ratio) {
         final float ir = 1.0f - ratio;
 
-        final float[] rgb1 = getARGB(color2), rgb2 = getARGB(color1);
+        final float[] rgb1 = getARGB(color2);
+        final float[] rgb2 = getARGB(color1);
 
         return toInt(new float[]{rgb1[0] * ratio + rgb2[0] * ir, rgb1[1] * ratio + rgb2[1] * ir, rgb1[2] * ratio + rgb2[2] * ir, rgb1[3] * ratio + rgb2[3] * ir});
 
