@@ -118,7 +118,7 @@ task genGitChangelog() {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.16.3-34.0.5'
+    minecraft 'net.minecraftforge:forge:1.16.3-34.1.0'
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
