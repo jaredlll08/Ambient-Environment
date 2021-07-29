@@ -51,7 +51,7 @@ modTemplate {
     mcVersion minecraft_version
     curseHomepage curse_homepage
     displayName mod_name
-
+    modLoader "Fabric"
     changelog {
         enabled true
         firstCommit git_first_commit

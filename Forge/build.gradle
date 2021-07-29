@@ -73,7 +73,7 @@ modTemplate {
     mcVersion minecraft_version
     curseHomepage curse_homepage
     displayName mod_name
-
+    modLoader "Forge"
     changelog {
         enabled true
         firstCommit git_first_commit
