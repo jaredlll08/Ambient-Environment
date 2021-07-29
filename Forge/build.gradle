@@ -70,7 +70,7 @@ minecraft {
 }
 
 modTemplate {
-    mcVersion mod_version
+    mcVersion minecraft_version
     curseHomepage curse_homepage
     displayName mod_name
 

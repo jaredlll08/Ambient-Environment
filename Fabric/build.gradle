@@ -48,7 +48,7 @@ loom {
 }
 
 modTemplate {
-    mcVersion mod_version
+    mcVersion minecraft_version
     curseHomepage curse_homepage
     displayName mod_name
 
@@ -124,7 +124,7 @@ publishing {
 curseforge {
 
     apiKey = findProperty('curseforge_api_token') ?: 0
-    def versions = [mod_version]
+    def versions = [minecraft_version]
 
     project {
         id = curse_project_id

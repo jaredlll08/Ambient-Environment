@@ -3,8 +3,8 @@ plugins {
     id("org.spongepowered.gradle.vanilla") version "0.2"
 }
 
-archivesBaseName = mod_name
-version = "common-${minecraft_version}-${mod_version}"
+archivesBaseName = "${mod_name}-common-${minecraft_version}"
+version = Utils.updatingVersion(mod_version)
 group = mod_group
 
 repositories {
