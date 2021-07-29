@@ -22,7 +22,7 @@ import com.blamejared.modtemplate.Utils
 sourceCompatibility = JavaVersion.VERSION_16
 targetCompatibility = JavaVersion.VERSION_16
 
-archivesBaseName = "${mod_name}-forge-${minecraft_version}"
+archivesBaseName = "${mod_name}-fabric-${minecraft_version}"
 version = Utils.updatingVersion(mod_version)
 group = mod_group
 
