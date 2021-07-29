@@ -1,0 +1,13 @@
+pluginManagement {
+    repositories {
+        maven {
+            name = 'Fabric'
+            url = 'https://maven.fabricmc.net/'
+        }
+        maven { url = 'https://maven.blamejared.com' }
+        gradlePluginPortal()
+    }
+}
+
+rootProject.name = 'AmbientEnvironment'
+include("Common", "Fabric", "Forge")
