@@ -24,9 +24,6 @@
     "fabric": "*",
     "minecraft": "1.17.x"
   },
-  "custom": {
-    "modmenu:clientsideOnly": true
-  },
   "mixins": [
     {
       "config": "ambientenvironment.client.json",
