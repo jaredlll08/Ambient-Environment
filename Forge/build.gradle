@@ -2,20 +2,21 @@ buildscript {
     repositories {
         maven { url = 'https://maven.minecraftforge.net' }
         maven { url = 'https://maven.blamejared.com' }
-        gradlePluginPortal()
-
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
         mavenCentral()
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
         classpath 'gradle.plugin.com.matthewprenger:CurseGradle:1.4.0'
         classpath group: 'com.blamejared', name: 'ModTemplate', version: '2.+', changing: true
+        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
     }
 }
 apply plugin: 'java'
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'com.blamejared.modtemplate'
 apply plugin: 'eclipse'
+apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'maven-publish'
 apply plugin: 'com.matthewprenger.cursegradle'
 
@@ -23,21 +24,29 @@ import com.blamejared.modtemplate.Utils
 
 archivesBaseName = "${mod_name}-forge-${minecraft_version}"
 version = Utils.updatingVersion(mod_version)
-group = mod_group
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(16)
+mixin {
+    add sourceSets.main, "ambientenvironment.refmap.json"
+}
 
 minecraft {
     mappings channel: 'official', version: minecraft_version
-    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
-    // Currently, this location cannot be changed from the default.
+
+    if (project.hasProperty('forge_ats_enabled') && project.findProperty('forge_ats_enabled').toBoolean()) {
+        // This location is hardcoded in Forge and can not be changed.
+        // https://github.com/MinecraftForge/MinecraftForge/blob/be1698bb1554f9c8fa2f58e32b9ab70bc4385e60/fmlloader/src/main/java/net/minecraftforge/fml/loading/moddiscovery/ModFile.java#L123
+        accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+        project.logger.debug('Forge Access Transformers are enabled for this project.')
+    }
 
     runs {
         client {
             workingDirectory project.file('run')
             ideaModule "${rootProject.name}.${project.name}.main"
+            taskName 'Client'
+            arg "--mixin=ambientenvironment.mixins.json"
             mods {
-                ambientenvironment {
+                modClientRun {
                     source sourceSets.main
                     source project(":Common").sourceSets.main
                 }
@@ -47,8 +56,10 @@ minecraft {
         server {
             workingDirectory project.file('run')
             ideaModule "${rootProject.name}.${project.name}.main"
+            taskName 'Server'
+            arg "--mixin=ambientenvironment.mixins.json"
             mods {
-                ambientenvironment {
+                modServerRun {
                     source sourceSets.main
                     source project(":Common").sourceSets.main
                 }
@@ -59,8 +70,10 @@ minecraft {
             workingDirectory project.file('run')
             ideaModule "${rootProject.name}.${project.name}.main"
             args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            taskName 'Data'
+            arg "--mixin=ambientenvironment.mixins.json"
             mods {
-                ambientenvironment {
+                modDataRun {
                     source sourceSets.main
                     source project(":Common").sourceSets.main
                 }
@@ -91,20 +104,23 @@ modTemplate {
     }
 }
 
-sourceSets.main.resources { srcDir 'src/generated/resources' }
-
-repositories {
-}
+sourceSets.main.resources.srcDir 'src/generated/resources'
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     compileOnly project(":Common")
+    annotationProcessor 'org.spongepowered:mixin:0.8.4-SNAPSHOT:processor'
+}
+
+tasks.withType(JavaCompile) {
+    source(project(":Common").sourceSets.main.allSource)
+}
+
+processResources {
+    from project(":Common").sourceSets.main.resources
 }
 
 jar {
-    dependsOn ":Common:compileJava"
-    from project(":Common").sourceSets.main.output
-
     manifest {
         attributes([
                 "Specification-Title"     : mod_name,
@@ -113,83 +129,23 @@ jar {
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.jar.archiveVersion,
                 "Implementation-Vendor"   : mod_author,
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                "MixinConfigs"            : "controlling.mixins.json"
         ])
     }
 }
 
-
 jar.finalizedBy('reobfJar')
 
-task sourcesJar(type: Jar, dependsOn: classes) {
-    description = 'Creates a JAR containing the source code.'
-    from sourceSets.main.allSource
-    archiveClassifier.set("sources")
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    description = 'Creates a JAR containing the JavaDocs.'
-    from javadoc.destinationDir
-    archiveClassifier.set("javadoc")
-}
-
-task deobfJar(type: Jar) {
-    description = 'Creates a JAR containing the non-obfuscated compiled code.'
-    from sourceSets.main.output
-    archiveClassifier.set("deobf")
-}
-
-artifacts {
-    archives sourcesJar
-    archives javadocJar
-    archives deobfJar
-}
-
-publish.dependsOn(project.tasks.getByName("assemble"))
-publish.mustRunAfter(project.tasks.getByName("build"))
-
 publishing {
-
     publications {
-
         mavenJava(MavenPublication) {
-
-            groupId project.group
-            artifactId project.archivesBaseName
-            version project.version
-            from components.java
-
-            // Allows the maven pom file to be modified.
-            pom.withXml {
-
-                // Go through all the dependencies.
-                asNode().dependencies.dependency.each { dep ->
-
-                    println 'Surpressing artifact ' + dep.artifactId.last().value().last() + ' from maven dependencies.'
-                    assert dep.parent().remove(dep)
-                }
-            }
-
-            artifact sourcesJar {
-
-                classifier 'sources'
-            }
-            artifact javadocJar {
-
-                classifier 'javadoc'
-            }
-            artifact deobfJar {
-
-                classifier 'deobf'
-            }
+            artifact jar
         }
     }
-
     repositories {
-
         maven {
-
-            url "file://" + System.getenv("local_maven")
+            url "file://${project.projectDir}/mcmodsrepo"
         }
     }
 }
@@ -204,9 +160,5 @@ curseforge {
         changelogType = 'markdown'
         addGameVersion "Forge"
         addGameVersion minecraft_version
-
-//        addArtifact(sourcesJar)
-//        addArtifact(javadocJar)
-        addArtifact(deobfJar)
     }
 }

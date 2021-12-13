@@ -1,20 +1,29 @@
 package com.blamejared.ambientenvironment;
 
+import com.blamejared.ambientenvironment.mixin.BiomeColorsAccessor;
 import net.minecraft.Util;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.ColorResolver;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.levelgen.SimpleRandomSource;
+import net.minecraft.world.level.levelgen.XoroshiroRandomSource;
 import net.minecraft.world.level.levelgen.synth.PerlinSimplexNoise;
 
+import java.util.List;
 import java.util.stream.IntStream;
 
 public class AmbientEnvironmentCommon {
     
     public static final int NOISE_OCTAVES = 2;
-    public static final PerlinSimplexNoise GRASS_NOISE = new PerlinSimplexNoise(new SimpleRandomSource("NOISE_GRASS".hashCode()), IntStream.rangeClosed(0, NOISE_OCTAVES));
-    public static final PerlinSimplexNoise WATER_NOISE = new PerlinSimplexNoise(new SimpleRandomSource("NOISE_WATER".hashCode()), IntStream.rangeClosed(0, NOISE_OCTAVES));
+    public static final List<Integer> OCTAVES = IntStream.rangeClosed(0, NOISE_OCTAVES).boxed().toList();
+    public static final PerlinSimplexNoise GRASS_NOISE = new PerlinSimplexNoise(new XoroshiroRandomSource("NOISE_GRASS".hashCode()), OCTAVES);
+    public static final PerlinSimplexNoise WATER_NOISE = new PerlinSimplexNoise(new XoroshiroRandomSource("NOISE_WATER".hashCode()), OCTAVES);
+    
+    public static void init() {
+        
+        BiomeColorsAccessor.setGrassColorResolver(AmbientEnvironmentCommon.GRASS_RESOLVER);
+        BiomeColorsAccessor.setWaterColorResolver(AmbientEnvironmentCommon.WATER_RESOLVER);
+    }
     
     public static final ColorResolver GRASS_RESOLVER = Util.make(() -> {
         final var baseResolver = BiomeColors.GRASS_COLOR_RESOLVER;
