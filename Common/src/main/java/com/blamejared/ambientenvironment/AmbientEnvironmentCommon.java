@@ -19,20 +19,22 @@ public class AmbientEnvironmentCommon {
     public static final PerlinSimplexNoise GRASS_NOISE = new PerlinSimplexNoise(new XoroshiroRandomSource("NOISE_GRASS".hashCode()), OCTAVES);
     public static final PerlinSimplexNoise WATER_NOISE = new PerlinSimplexNoise(new XoroshiroRandomSource("NOISE_WATER".hashCode()), OCTAVES);
     
+    public static final ColorResolver GRASS_RESOLVER = Util.make(() -> {
+        final var baseResolver = BiomeColors.GRASS_COLOR_RESOLVER;
+        return (biome, x, z) -> modifyColour(GRASS_NOISE, baseResolver, biome, x, z, 8f, 0.25f);
+    });
+    
+    public static final ColorResolver WATER_RESOLVER = Util.make(() -> {
+        final var baseResolver = BiomeColors.WATER_COLOR_RESOLVER;
+        return (biome, x, z) -> modifyColour(WATER_NOISE, baseResolver, biome, x, z, 16f, 0.3f);
+    });
+    
     public static void init() {
         
         BiomeColorsAccessor.setGrassColorResolver(AmbientEnvironmentCommon.GRASS_RESOLVER);
         BiomeColorsAccessor.setWaterColorResolver(AmbientEnvironmentCommon.WATER_RESOLVER);
     }
     
-    public static final ColorResolver GRASS_RESOLVER = Util.make(() -> {
-        final var baseResolver = BiomeColors.GRASS_COLOR_RESOLVER;
-        return (biome, x, z) -> modifyColour(GRASS_NOISE, baseResolver, biome, x, z, 8f, 0.25f);
-    });
-    public static final ColorResolver WATER_RESOLVER = Util.make(() -> {
-        final var baseResolver = BiomeColors.WATER_COLOR_RESOLVER;
-        return (biome, x, z) -> modifyColour(WATER_NOISE, baseResolver, biome, x, z, 16f, 0.3f);
-    });
     
     private static int modifyColour(PerlinSimplexNoise generator, ColorResolver resolver, Biome biome, double x, double z, double scale, double darkness) {
         
