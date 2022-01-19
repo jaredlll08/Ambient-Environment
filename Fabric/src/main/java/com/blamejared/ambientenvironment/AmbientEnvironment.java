@@ -9,8 +9,7 @@ public class AmbientEnvironment implements ClientModInitializer {
     
     @Override
     public void onInitializeClient() {
-        
-        AmbientEnvironmentCommon.init();
+    
     }
     
 }

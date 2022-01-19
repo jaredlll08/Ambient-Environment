@@ -27,6 +27,10 @@
     {
       "config": "ambientenvironment.mixins.json",
       "environment": "client"
+    },
+    {
+      "config": "ambientenvironment.fabric.mixins.json",
+      "environment": "client"
     }
   ]
 }

@@ -43,5 +43,5 @@ minecraft {
 }
 
 dependencies {
-    compileOnly group:'org.spongepowered', name:'mixin', version:'0.8.4'
+    compileOnly group:'org.spongepowered', name:'mixin', version:'0.8.5'
 }
