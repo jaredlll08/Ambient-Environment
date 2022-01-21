@@ -18,7 +18,7 @@ buildscript {
 plugins {
     `java-library`
     idea
-    id("com.blamejared.modtemplate") version ("3.0.+")
+    id("com.blamejared.modtemplate") version ("3.0.0.+")
 }
 
 val minecraftVersion: String by project
