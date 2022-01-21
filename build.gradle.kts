@@ -14,6 +14,7 @@ buildscript {
         classpath("com.diluv.schoomp:Schoomp:1.2.5")
     }
 }
+
 plugins {
     `java-library`
     idea
@@ -115,17 +116,17 @@ tasks.create("postDiscord") {
             }
 
             downloadSources.add(
-                    "<:maven:932165250738970634> `\"com.blamejared.crafttweaker:${project(":Common").base.archivesName.get()}:${
+                    "<:maven:932165250738970634> `\"com.blamejared.ambientenvironment:${project(":Common").base.archivesName.get()}:${
                         project(":Common").version
                     }\"`"
             )
             downloadSources.add(
-                    "<:maven:932165250738970634> `\"com.blamejared.crafttweaker:${project(":Fabric").base.archivesName.get()}:${
+                    "<:maven:932165250738970634> `\"com.blamejared.ambientenvironment:${project(":Fabric").base.archivesName.get()}:${
                         project(":Fabric").version
                     }\"`"
             )
             downloadSources.add(
-                    "<:maven:932165250738970634> `\"com.blamejared.crafttweaker:${project(":Forge").base.archivesName.get()}:${
+                    "<:maven:932165250738970634> `\"com.blamejared.ambientenvironment:${project(":Forge").base.archivesName.get()}:${
                         project(":Forge").version
                     }\"`"
             )
