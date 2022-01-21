@@ -1,6 +1,6 @@
 import com.blamejared.modtemplate.Utils
 import net.darkhax.curseforgegradle.TaskPublishCurseForge
-import net.darkhax.curseforgegradle.Constants as CFG_Contants
+import net.darkhax.curseforgegradle.Constants as CFG_Constants
 
 plugins {
     `maven-publish`
@@ -112,7 +112,7 @@ tasks.create<TaskPublishCurseForge>("publishCurseForge") {
     val mainFile = upload(curseProjectId, file("${project.buildDir}/libs/$baseArchiveName-$version.jar"))
     mainFile.changelogType = "markdown"
     mainFile.changelog = Utils.getFullChangelog(project)
-    mainFile.releaseType = CFG_Contants.RELEASE_TYPE_RELEASE
+    mainFile.releaseType = CFG_Constants.RELEASE_TYPE_RELEASE
     mainFile.addJavaVersion("Java $modJavaVersion")
     mainFile.addGameVersion(minecraftVersion)
 

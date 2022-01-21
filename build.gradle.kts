@@ -27,6 +27,7 @@ val modAuthor: String by project
 val modJavaVersion: String by project
 val modAvatar: String by project
 val modVersion: String by project
+val gitRepo: String by project
 
 version = Utils.updatingSemVersion(modVersion)
 
@@ -140,7 +141,7 @@ tasks.create("postDiscord") {
             }
 
             // Just use the Forge changelog for now, the files are the same anyway.
-            embed.addField("Changelog", Utils.getCIChangelog(project).take(1000), false)
+            embed.addField("Changelog", Utils.getCIChangelog(project, gitRepo).take(1000), false)
 
             embed.color = 0xF16436
             message.addEmbed(embed)
