@@ -1,13 +1,13 @@
-modLoader="javafml" #mandatory
+modLoader="javafml"
 loaderVersion="[39,)"
 license="MIT"
 issueTrackerURL="https://github.com/jaredlll08/Ambient-Environment/issues"
-[[mods]] #mandatory
-modId="ambientenvironment" #mandatory
-version="${file.jarVersion}" #mandatory
-displayName="Ambient Environment" #mandatory
-credits="MC Bedrock edition lol" #optional
-authors="Jaredlll08" #optional
+[[mods]]
+modId="ambientenvironment"
+version="${file.jarVersion}"
+displayName="Ambient Environment"
+credits="MC Bedrock edition lol"
+authors="Jaredlll08"
 updateJSONURL="https://updates.blamejared.com/get?n=AmbientEnvironment&gv=1.18.2"
 description='''
 Adds more ambiance to the game
