@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[39,)"
+loaderVersion="[31,)"
 license="MIT"
 issueTrackerURL="https://github.com/jaredlll08/Ambient-Environment/issues"
 [[mods]]
@@ -8,7 +8,7 @@ version="${file.jarVersion}"
 displayName="Ambient Environment"
 credits="MC Bedrock edition lol"
 authors="Jaredlll08"
-updateJSONURL="https://updates.blamejared.com/get?n=AmbientEnvironment&gv=1.18.2"
+updateJSONURL="https://updates.blamejared.com/get?n=AmbientEnvironment&gv=1.19"
 description='''
 Adds more ambiance to the game
 '''
