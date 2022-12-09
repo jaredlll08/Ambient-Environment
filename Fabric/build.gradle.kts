@@ -47,12 +47,6 @@ loom {
             ideConfigGenerated(true)
             runDir("run")
         }
-        named("server") {
-            server()
-            setConfigName("Fabric Server")
-            ideConfigGenerated(true)
-            runDir("run_server")
-        }
     }
 }
 

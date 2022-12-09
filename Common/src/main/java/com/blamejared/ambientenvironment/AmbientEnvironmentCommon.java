@@ -31,8 +31,8 @@ public class AmbientEnvironmentCommon {
     
     public static void init() {
         
-        BiomeColorsAccessor.setGrassColorResolver(AmbientEnvironmentCommon.GRASS_RESOLVER);
-        BiomeColorsAccessor.setWaterColorResolver(AmbientEnvironmentCommon.WATER_RESOLVER);
+        BiomeColorsAccessor.ambientenvironment$setGrassColorResolver(AmbientEnvironmentCommon.GRASS_RESOLVER);
+        BiomeColorsAccessor.ambientenvironment$setWaterColorResolver(AmbientEnvironmentCommon.WATER_RESOLVER);
     }
     
     

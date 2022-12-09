@@ -10,14 +10,14 @@ public interface BiomeColorsAccessor {
     
     @Mutable
     @Accessor("GRASS_COLOR_RESOLVER")
-    public static void setGrassColorResolver(ColorResolver newResolver) {
+    static void ambientenvironment$setGrassColorResolver(ColorResolver newResolver) {
         
         throw new AssertionError();
     }
     
     @Mutable
     @Accessor("WATER_COLOR_RESOLVER")
-    public static void setWaterColorResolver(ColorResolver newResolver) {
+    static void ambientenvironment$setWaterColorResolver(ColorResolver newResolver) {
         
         throw new AssertionError();
     }

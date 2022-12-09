@@ -56,40 +56,6 @@ minecraft {
                 }
             }
         }
-        create("server") {
-            taskName("Server")
-            workingDirectory(project.file("run_server"))
-            ideaModule("${rootProject.name}.${project.name}.main")
-            args("-mixin.config=${modId}.mixins.json", "nogui")
-            mods {
-                create(modId) {
-                    source(sourceSets.main.get())
-                    source(project(":Common").sourceSets.main.get())
-                }
-            }
-        }
-
-        create("data") {
-            taskName("Data")
-            workingDirectory(project.file("run"))
-            ideaModule("${rootProject.name}.${project.name}.main")
-            args(
-                    "--mod",
-                    modId,
-                    "--all",
-                    "--output",
-                    file("src/generated/resources/"),
-                    "--existing",
-                    file("src/main/resources/")
-            )
-            args("-mixin.config=${modId}.mixins.json")
-            mods {
-                create(modId) {
-                    source(sourceSets.main.get())
-                    source(project(":Common").sourceSets.main.get())
-                }
-            }
-        }
     }
 }
 
@@ -110,8 +76,6 @@ modTemplate {
         homepage(curseHomepageLink)
     }
 }
-
-sourceSets.main.get().resources.srcDir("src/generated/resources")
 
 dependencies {
     "minecraft"("net.minecraftforge:forge:${minecraftVersion}-${forgeVersion}")

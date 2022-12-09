@@ -20,14 +20,6 @@ base {
 
 minecraft {
     version(minecraftVersion)
-    runs {
-        client("Common Client") {
-            workingDirectory(project.file("run"))
-        }
-        server("Common Server") {
-            workingDirectory(project.file("run_server"))
-        }
-    }
 }
 
 dependencies {
