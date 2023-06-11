@@ -5,7 +5,7 @@ import net.darkhax.curseforgegradle.TaskPublishCurseForge
 import net.darkhax.curseforgegradle.Constants as CFG_Constants
 
 plugins {
-    id("fabric-loom") version "1.1-SNAPSHOT"
+    id("fabric-loom") version "1.2-SNAPSHOT"
     id("com.blamejared.ambientenvironment.default")
     id("com.blamejared.ambientenvironment.loader")
     id("com.modrinth.minotaur")
@@ -55,7 +55,4 @@ modrinth {
     versionName.set("Forge-${Versions.MINECRAFT}-$version")
     versionType.set("release")
     uploadFile.set(tasks.remapJar.get())
-    dependencies {
-        required.project("fabric-api")
-    }
 }

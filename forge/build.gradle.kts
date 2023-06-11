@@ -7,7 +7,7 @@ import net.darkhax.curseforgegradle.Constants as CFG_Constants
 plugins {
     id("com.blamejared.ambientenvironment.default")
     id("com.blamejared.ambientenvironment.loader")
-    id("net.minecraftforge.gradle") version ("5.1.+")
+    id("net.minecraftforge.gradle") version ("[6.0,6.2)")
     id("org.spongepowered.mixin") version ("0.7-SNAPSHOT")
     id("com.modrinth.minotaur")
 }
@@ -62,7 +62,4 @@ modrinth {
     versionName.set("Forge-${Versions.MINECRAFT}-$version")
     versionType.set("release")
     uploadFile.set(tasks.jar.get())
-    dependencies {
-        required.project("fabric-api")
-    }
 }
