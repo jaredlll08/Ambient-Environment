@@ -52,7 +52,7 @@ modrinth {
     token.set(GMUtils.locateProperty(project, "modrinth_token"))
     projectId.set(Properties.MODRINTH_PROJECT_ID)
     changelog.set(GMUtils.smallChangelog(project, Properties.GIT_REPO))
-    versionName.set("Forge-${Versions.MINECRAFT}-$version")
+    versionName.set("Fabric-${Versions.MINECRAFT}-$version")
     versionType.set("release")
     uploadFile.set(tasks.remapJar.get())
 }
