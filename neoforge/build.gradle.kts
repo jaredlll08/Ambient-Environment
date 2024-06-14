@@ -56,5 +56,6 @@ modrinth {
     versionType.set("release")
     gameVersions.set(listOf(Versions.MINECRAFT))
     uploadFile.set(tasks.jar.get())
+    loaders.add("neoforge")
 }
 tasks.modrinth.get().dependsOn(tasks.jar)
