@@ -1,26 +1,33 @@
-import com.blamejared.gradle.mod.utils.GMUtils
 import com.blamejared.ambientenvironment.gradle.Properties
 import com.blamejared.ambientenvironment.gradle.Versions
+import com.blamejared.gradle.mod.utils.GMUtils
 import net.darkhax.curseforgegradle.Constants
 import net.darkhax.curseforgegradle.TaskPublishCurseForge
 
 plugins {
     id("com.blamejared.ambientenvironment.default")
     id("com.blamejared.ambientenvironment.loader")
-    id("net.neoforged.gradle.userdev") version ("7.0.107")
+    id("net.neoforged.moddev") version ("0.1.74")
     id("com.modrinth.minotaur")
 }
 
-runs {
-    configureEach {
-        modSource(project.sourceSets.main.get())
+neoForge {
+    version = Versions.NEO_FORGE
+//     accessTransformers.add(file('src/main/resources/META-INF/accesstransformer.cfg'))
+    runs {
+        register("client") {
+            client()
+        }
     }
-    register("client") {
+
+    mods {
+        register(Properties.MODID) {
+            sourceSet(sourceSets.main.get())
+        }
     }
 }
 
 dependencies {
-    implementation("net.neoforged:neoforge:${Versions.NEO_FORGE}")
     compileOnly(project(":common"))
 }
 
