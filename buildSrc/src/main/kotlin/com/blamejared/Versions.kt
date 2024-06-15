@@ -1,4 +1,4 @@
-package com.blamejared.ambientenvironment.gradle
+package com.blamejared
 
 object Versions {
     const val MOD = "17.0.0"

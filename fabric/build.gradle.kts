@@ -1,13 +1,12 @@
-import com.blamejared.ambientenvironment.gradle.Properties
-import com.blamejared.ambientenvironment.gradle.Versions
+import com.blamejared.Properties
+import com.blamejared.Versions
 import com.blamejared.gradle.mod.utils.GMUtils
 import net.darkhax.curseforgegradle.TaskPublishCurseForge
 import net.darkhax.curseforgegradle.Constants as CFG_Constants
 
 plugins {
+    id("blamejared-modloader-conventions")
     id("fabric-loom") version "1.6-SNAPSHOT"
-    id("com.blamejared.ambientenvironment.default")
-    id("com.blamejared.ambientenvironment.loader")
     id("com.modrinth.minotaur")
 }
 
@@ -15,7 +14,6 @@ dependencies {
     minecraft("com.mojang:minecraft:${Versions.MINECRAFT}")
     mappings(loom.officialMojangMappings())
     modImplementation("net.fabricmc:fabric-loader:${Versions.FABRIC_LOADER}")
-    implementation(project(":common"))
 }
 
 loom {

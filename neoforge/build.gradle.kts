@@ -1,12 +1,11 @@
-import com.blamejared.ambientenvironment.gradle.Properties
-import com.blamejared.ambientenvironment.gradle.Versions
+import com.blamejared.Properties
+import com.blamejared.Versions
 import com.blamejared.gradle.mod.utils.GMUtils
 import net.darkhax.curseforgegradle.Constants
 import net.darkhax.curseforgegradle.TaskPublishCurseForge
 
 plugins {
-    id("com.blamejared.ambientenvironment.default")
-    id("com.blamejared.ambientenvironment.loader")
+    id("blamejared-modloader-conventions")
     id("net.neoforged.moddev") version ("0.1.74")
     id("com.modrinth.minotaur")
 }
@@ -28,7 +27,6 @@ neoForge {
 }
 
 dependencies {
-    compileOnly(project(":common"))
 }
 
 tasks.create<TaskPublishCurseForge>("publishCurseForge") {
