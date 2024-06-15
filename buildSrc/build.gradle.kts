@@ -16,16 +16,3 @@ dependencies {
     implementation(group = "com.modrinth.minotaur", name = "Minotaur", version = "2.+")
     implementation(group = "com.diluv.schoomp", name= "Schoomp", version="1.2.6")
 }
-
-gradlePlugin {
-    plugins {
-        create("default") {
-            id = "com.blamejared.ambientenvironment.default"
-            implementationClass = "com.blamejared.ambientenvironment.gradle.DefaultPlugin"
-        }
-        create("loader") {
-            id = "com.blamejared.ambientenvironment.loader"
-            implementationClass = "com.blamejared.ambientenvironment.gradle.LoaderPlugin"
-        }
-    }
-}
