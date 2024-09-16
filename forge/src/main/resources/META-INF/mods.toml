@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "${FORGE_LOADER}"
+loaderVersion = "*"
 issueTrackerURL = "${GIT_REPO}/issues"
 license = "MIT"
 [[mods]]
@@ -14,7 +14,7 @@ itemIcon = "${ITEM_ICON}"
 [[dependencies.${MODID}]]
 modId = "forge"
 mandatory = true
-versionRange = "${FORGE_LOADER}"
+versionRange = "[${FORGE},)"
 ordering = "NONE"
 side = "BOTH"
 [[dependencies.${MODID}]]

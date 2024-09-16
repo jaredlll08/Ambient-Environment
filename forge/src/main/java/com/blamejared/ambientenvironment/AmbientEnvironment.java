@@ -9,11 +9,10 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 @Mod("ambientenvironment")
 public class AmbientEnvironment {
     
-    public AmbientEnvironment() {
+    public AmbientEnvironment(FMLJavaModLoadingContext context) {
         
-        ModLoadingContext.get()
-                .registerExtensionPoint(IExtensionPoint.DisplayTest.class, () -> new IExtensionPoint.DisplayTest(() -> IExtensionPoint.DisplayTest.IGNORESERVERONLY, (remote, isServer) -> true));
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+        context.registerDisplayTest(IExtensionPoint.DisplayTest.IGNORE_ALL_VERSION);
+        context.getModEventBus().addListener(this::doClientStuff);
     }
     
     private void doClientStuff(final FMLClientSetupEvent event) {
