@@ -12,6 +12,7 @@
     "issues": "${GIT_REPO}/issues"
   },
   "license": "MIT",
+  "icon": "assets/ambientenvironment/icon.png",
   "entrypoints": {
     "client": [
       "com.blamejared.ambientenvironment.AmbientEnvironment"
