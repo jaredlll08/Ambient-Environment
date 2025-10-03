@@ -6,8 +6,8 @@ object Versions {
     const val MINECRAFT = "1.21.9"
     const val FABRIC_LOADER = "0.17.2"
     const val FABRIC = "0.134.0+1.21.9"
-    const val FORGE = "59.0.1" // 1.20.4
-    const val FORGE_LOADER = "[59,)" // 1.20.4
+    const val FORGE = "49.0.19" // 1.20.4
+    const val FORGE_LOADER = "[49,)" // 1.20.4
     const val NEO_FORGE = "21.9.11-beta"
     const val NEO_FORGE_LOADER= "[4,)"
 }
