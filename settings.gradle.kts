@@ -17,5 +17,4 @@ plugins {
 rootProject.name = "AmbientEnvironment"
 include("common")
 include("fabric")
-//include("forge")
 include("neoforge")
