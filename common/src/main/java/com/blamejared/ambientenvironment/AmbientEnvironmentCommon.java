@@ -1,9 +1,9 @@
 package com.blamejared.ambientenvironment;
 
 import com.blamejared.ambientenvironment.mixin.BiomeColorsAccessor;
-import net.minecraft.Util;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.util.Mth;
+import net.minecraft.util.Util;
 import net.minecraft.world.level.ColorResolver;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.XoroshiroRandomSource;
