@@ -42,7 +42,8 @@ tasks.register('publishCurseForge', TaskPublishCurseForge) {
     mainFile.addJavaVersion("Java ${java_version}")
     mainFile.addGameVersion(minecraft)
     mainFile.addRequirement('fabric-api')
-
+    mainFile.addEnvironment('Client')
+    
     doLast {
         project.ext.set('curse_file_url', "${curse_homepage}/files/${mainFile.curseFileId}")
     }
