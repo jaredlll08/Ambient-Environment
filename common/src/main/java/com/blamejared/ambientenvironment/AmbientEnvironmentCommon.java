@@ -6,18 +6,30 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.Util;
 import net.minecraft.world.level.ColorResolver;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.XoroshiroRandomSource;
-import net.minecraft.world.level.levelgen.synth.PerlinSimplexNoise;
+import net.minecraft.world.level.levelgen.synth.Noise;
+import net.minecraft.world.level.levelgen.synth.NoiseStack;
+import net.minecraft.world.level.levelgen.synth.SimplexNoise;
 
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.IntStream;
 
 public class AmbientEnvironmentCommon {
     
     public static final int NOISE_OCTAVES = 2;
     public static final List<Integer> OCTAVES = IntStream.rangeClosed(0, NOISE_OCTAVES).boxed().toList();
-    public static final PerlinSimplexNoise GRASS_NOISE = new PerlinSimplexNoise(new XoroshiroRandomSource("NOISE_GRASS".hashCode()), OCTAVES);
-    public static final PerlinSimplexNoise WATER_NOISE = new PerlinSimplexNoise(new XoroshiroRandomSource("NOISE_WATER".hashCode()), OCTAVES);
+    private static final Function<String, Noise> NOISE_GENERATOR = s -> {
+        WorldgenRandom random = new WorldgenRandom(new XoroshiroRandomSource(s.hashCode()));
+        NoiseStack.Builder builder = NoiseStack.builder();
+        for(Integer octave : OCTAVES) {
+            builder.add(new SimplexNoise(random, true), octave, (1 + octave) / 7f);
+        }
+        return builder.build();
+    };
+    public static final Noise GRASS_NOISE = NOISE_GENERATOR.apply("NOISE_GRASS");
+    public static final Noise WATER_NOISE = NOISE_GENERATOR.apply("NOISE_WATER");
     
     public static final ColorResolver GRASS_RESOLVER = Util.make(() -> {
         final var baseResolver = BiomeColors.GRASS_COLOR_RESOLVER;
@@ -35,11 +47,10 @@ public class AmbientEnvironmentCommon {
         BiomeColorsAccessor.ambientenvironment$setWaterColorResolver(AmbientEnvironmentCommon.WATER_RESOLVER);
     }
     
-    
-    private static int modifyColour(PerlinSimplexNoise generator, ColorResolver resolver, Biome biome, double x, double z, double scale, double darkness) {
+    private static int modifyColour(Noise generator, ColorResolver resolver, Biome biome, double x, double z, double scale, double darkness) {
         
         final int base = resolver.getColor(biome, x, z);
-        double value = generator.getValue(x / scale, z / scale, false);
+        double value = generator.get(x / scale, z / scale);
         value = curve(0, 1, remap(value, -((1 << NOISE_OCTAVES) - 1), (1 << NOISE_OCTAVES) - 1, 0, 1)) * darkness;
         return blend(base, 0, (float) (value));
     }
